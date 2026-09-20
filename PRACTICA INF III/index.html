@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ficha rápida de paciente</title>
+<style>
+  .tarjeta { background: #eef7f7; padding: 16px; border-radius: 10px; }
+  .aviso { color: #b23b3b; font-weight: bold; }
+</style>
+</head>
+<body>
+  <div class="tarjeta">
+    <h2>Datos del paciente</h2>
+    <label>Peso (kg): <input id="peso" type="number" min="1" step="0.1"></label><br><br>
+    <label>Altura (m): <input id="altura" type="number" min="0.5" max="2.5" step="0.01"></label><br><br>
+    <button id="btnCalcular">Calcular IMC</button>
+    <p id="resultado" aria-live="polite"></p>
+    <p class="aviso">Recordá confirmar los datos con el paciente antes de guardar.</p>
+  </div>
+
+  <script>
+    document.getElementById("btnCalcular").addEventListener("click", function () {
+      const peso = parseFloat(document.getElementById("peso").value);
+      const altura = parseFloat(document.getElementById("altura").value);
+      const resultado = document.getElementById("resultado");
+
+      if (!(peso > 0) || !(altura > 0)) {
+        resultado.textContent = "Ingresá un peso y una altura válidos.";
+        return;
+      }
+
+      const imc = peso / (altura * altura);
+      resultado.textContent = "IMC: " + imc.toFixed(2);
+    });
+  </script>
+</body>
+</html>
